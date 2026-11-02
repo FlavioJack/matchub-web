@@ -11,7 +11,16 @@ let S = {
 }
 
 function render(){
+    renderPlayers();
+}
 
+function renderPlayers(){
+    playerList.textContent = "";
+    S.players.forEach(p => {
+        const playerItem = document.createElement('LI');
+        playerItem.textContent = p.name;
+        playerList.appendChild(playerItem);
+    });
 }
 
 // FUNCTIONS
