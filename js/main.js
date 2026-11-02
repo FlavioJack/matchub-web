@@ -20,7 +20,7 @@ function renderPlayers(){
         newItem.setAttribute("data-id", p.id);
         newItem.innerHTML = `
             <span>${p.name}</span>
-            <input type="button" class="player-checkbox">
+            <input type="button" class="delete-player-btn">
         `;
         playerList.appendChild(newItem);
     });
