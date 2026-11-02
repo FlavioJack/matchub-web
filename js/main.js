@@ -1,5 +1,6 @@
-const input = document.querySelector('#input');
+const playerNameInput = document.querySelector('#input');
 const addPlayerBtn = document.querySelector('.add-player-btn');
+const playerList = document.querySelector('.player-list');
 
 // MAIN DATA STRUCTURE
 let S = {
@@ -9,6 +10,10 @@ let S = {
     nextId: 1
 }
 
+function render(){
+
+}
+
 // FUNCTIONS
 function createPlayer(pname){
     S.players.push({id: S.nextId++, name: pname});
@@ -16,10 +21,10 @@ function createPlayer(pname){
 
 
 addPlayerBtn.addEventListener("click", ()=>{
-    const newName = input.value.trim();
+    const newName = playerNameInput.value.trim();
     if(newName == "") return;
     createPlayer(newName);
-   
+    render();
 });
 
  console.log(S);
