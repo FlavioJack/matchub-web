@@ -10,24 +10,36 @@ let S = {
     nextId: 1
 }
 
+// -------- FUNCTIONS --------
+
+// Graphics
+function renderPlayers(){
+    playerList.textContent = "";
+    S.players.forEach(p => {
+        const newItem = document.createElement('LI');
+        newItem.setAttribute("data-id", p.id);
+        newItem.innerHTML = `
+            <span>${p.name}</span>
+            <input type="button" class="player-checkbox">
+        `;
+        playerList.appendChild(newItem);
+    });
+}
+
 function render(){
     renderPlayers();
 }
 
-function renderPlayers(){
-    playerList.textContent = "";
-    S.players.forEach(p => {
-        const playerItem = document.createElement('LI');
-        playerItem.textContent = p.name;
-        playerList.appendChild(playerItem);
-    });
-}
-
-// FUNCTIONS
+// Logic
 function createPlayer(pname){
     S.players.push({id: S.nextId++, name: pname});
 }
 
+function deletePlayer(){
+
+}
+
+// -------- EVENTS HANDLERS --------
 
 addPlayerBtn.addEventListener("click", ()=>{
     const newName = playerNameInput.value.trim();
