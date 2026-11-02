@@ -46,6 +46,8 @@ addPlayerBtn.addEventListener("click", ()=>{
     if(newName == "") return;
     createPlayer(newName);
     render();
+    playerNameInput.value = "";
+    playerNameInput.focus();
 });
 
  console.log(S);
