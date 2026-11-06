@@ -20,7 +20,7 @@ function renderPlayers(){
         newItem.setAttribute("data-id", p.id);
         newItem.innerHTML = `
             <span>${p.name}</span>
-            <input type="button" class="delete-player-btn" value="Elimina">
+            <button class="delete-player-btn">Elimina</button>
         `;
         playerList.appendChild(newItem);
     });
@@ -35,8 +35,9 @@ function createPlayer(pname){
     S.players.push({id: S.nextId++, name: pname});
 }
 
-function deletePlayer(){
-
+function deletePlayer(pid){
+    const i = S.players.findIndex(p => p.id === pid);
+    S.players.splice(i, 1);
 }
 
 // -------- EVENTS HANDLERS --------
@@ -50,5 +51,5 @@ addPlayerBtn.addEventListener("click", ()=>{
     playerNameInput.focus();
 });
 
- console.log(S);
 
+console.log(S);
