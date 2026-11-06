@@ -1,7 +1,8 @@
 const playerNameInput = document.querySelector('#input');
 const addPlayerBtn = document.querySelector('.add-player-btn');
+const delPlayerBtn = document.querySelector('.del-player-btn');
 const delAllPlayersBtn = document.querySelector('.del-all-btn');
-const playerList = document.querySelector('.player-list');
+const playersList = document.querySelector('.players-list');
 
 const firstId = 1;
 
@@ -17,12 +18,16 @@ const S = {
 
 // Graphics
 function renderPlayers(){
-    playerList.textContent = "";
+    playersList.textContent = "";
     S.players.forEach(p => {
         const newItem = document.createElement('LI');
         newItem.setAttribute("data-id", p.id);
-        newItem.textContent = p.name;
-        playerList.appendChild(newItem);
+        newItem.innerHTML = `
+            ${p.name}
+            <input type="checkbox" class="checkbox">
+        `;
+        //newItem.textContent = p.name;
+        playersList.appendChild(newItem);
     });
 }
 
@@ -36,9 +41,15 @@ function createPlayer(pname){
     S.players.push({id: S.nextId++, name: pname});
 }
 
-function deletePlayer(pid){
-    const i = S.players.findIndex(p => p.id === pid);
-    S.players.splice(i, 1);
+function deletePlayers(pidList){
+    // da capire come funziona .filter
+    // S.players = S.players.filter(p => !pidList.includes(p.id));
+    pidList.forEach(pid=>{
+        const i = S.players.findIndex(p => p.id === pid);
+        if(i !== -1){
+            S.players.splice(i, 1);
+        }
+    });
 }
 
 function deleteAllPlayers(){
@@ -66,6 +77,24 @@ addPlayerBtn.addEventListener("click", ()=>{
     render();
     playerNameInput.value = "";
     playerNameInput.focus();
+});
+
+delPlayerBtn.addEventListener("click", ()=>{
+    const itemsToDelete = [];
+
+    for(const li of playersList.children){ 
+        if(li.querySelector(".checkbox").checked){
+            itemsToDelete.push(Number(li.dataset.id));
+        }
+    }
+    deletePlayers(itemsToDelete);
+    /*
+    itemsToDelete.forEach(i=>{
+        deletePlayers(i);
+    })
+    */
+    render();
+
 });
 
 delAllPlayersBtn.addEventListener("click", ()=>{
