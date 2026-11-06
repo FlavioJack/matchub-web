@@ -1,13 +1,16 @@
 const playerNameInput = document.querySelector('#input');
 const addPlayerBtn = document.querySelector('.add-player-btn');
+const delAllPlayersBtn = document.querySelector('.del-all-btn');
 const playerList = document.querySelector('.player-list');
 
+const firstId = 1;
+
 // MAIN DATA STRUCTURE
-let S = {
+const S = {
     players: [],
     teams: [],
     matches: [],
-    nextId: 1
+    nextId: firstId
 }
 
 // -------- FUNCTIONS --------
@@ -18,10 +21,7 @@ function renderPlayers(){
     S.players.forEach(p => {
         const newItem = document.createElement('LI');
         newItem.setAttribute("data-id", p.id);
-        newItem.innerHTML = `
-            <span>${p.name}</span>
-            <button class="delete-player-btn">Elimina</button>
-        `;
+        newItem.textContent = p.name;
         playerList.appendChild(newItem);
     });
 }
@@ -40,6 +40,11 @@ function deletePlayer(pid){
     S.players.splice(i, 1);
 }
 
+function deleteAllPlayers(){
+    S.players.length = 0; // svuota array
+    S.players.nextId = firstId; // reset del nextId
+}
+
 // -------- EVENTS HANDLERS --------
 
 addPlayerBtn.addEventListener("click", ()=>{
@@ -49,6 +54,11 @@ addPlayerBtn.addEventListener("click", ()=>{
     render();
     playerNameInput.value = "";
     playerNameInput.focus();
+});
+
+delAllPlayersBtn.addEventListener("click", ()=>{
+    deleteAllPlayers();
+    render();
 });
 
 
