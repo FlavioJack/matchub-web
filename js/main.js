@@ -28,6 +28,7 @@ function renderPlayers(){
 
 function render(){
     renderPlayers();
+    console.log(S);
 }
 
 // Logic
@@ -42,7 +43,7 @@ function deletePlayer(pid){
 
 function deleteAllPlayers(){
     S.players.length = 0; // svuota array
-    S.players.nextId = firstId; // reset del nextId
+    S.nextId = firstId; // reset del nextId
 }
 
 // -------- EVENTS HANDLERS --------
@@ -73,4 +74,3 @@ delAllPlayersBtn.addEventListener("click", ()=>{
 });
 
 
-console.log(S);
