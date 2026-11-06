@@ -47,6 +47,17 @@ function deleteAllPlayers(){
 
 // -------- EVENTS HANDLERS --------
 
+playerNameInput.addEventListener("keydown",(event)=>{
+    if(event.key == "Enter"){
+        const newName = playerNameInput.value.trim();
+        if(newName == "") return;
+        createPlayer(newName);
+        render();
+        playerNameInput.value = "";
+        playerNameInput.focus();
+    }
+});
+
 addPlayerBtn.addEventListener("click", ()=>{
     const newName = playerNameInput.value.trim();
     if(newName == "") return;
